@@ -1,7 +1,7 @@
 ﻿// http://unitygems.com/noobs-guide-shaders-5-bumped-diffuse-shader/
 
 
-Shader "Custom/ForwardLitBumpFragment_OneLight" {
+Shader "Custom/ForwardLitBumpFragment_MultipleLights" {
     Properties {
         _MainTex ("Base (RGB)", 2D) = "white" {}
         _Bump ("Bump", 2D) = "bump" {}
@@ -10,7 +10,10 @@ Shader "Custom/ForwardLitBumpFragment_OneLight" {
         Tags { "RenderType"="Opaque" }
         LOD 200
  
-        Pass {
+        Pass {        
+        		// Tell the system this is what should happen for the most important light
+        	Tags { "LightMode" = "ForwardBase" }
+        
 				// tell the pass to turn on lighting and cull back faces		
 			Cull Back			
 				// We haave a couple of choices when we write a shader - we can define multiple passes so that each light gets to have a go at our program,
@@ -129,6 +132,75 @@ Shader "Custom/ForwardLitBumpFragment_OneLight" {
             ENDCG
         }
  
+ 		// Copy and past of our first pass to make a second pass, but changing the tag to ForwardAid
+ 		Pass {        
+        	Tags { "LightMode" = "ForwardAdd" }        		
+			Cull Back			
+			Lighting On
+				// and add a command telling it how to blend colors
+			Blend One One
+				// In other words, add 1 * the current value to 1 * the new value.
+				
+            CGPROGRAM
+// Upgrade NOTE: excluded shader from DX11 and Xbox360; has structs without semantics (struct v2f members lightDirection)
+#pragma exclude_renderers d3d11 xbox360
+            #pragma vertex vert
+            #pragma fragment frag
+            #include "UnityCG.cginc"
+            
+            uniform float4 _LightColor0;		
+ 
+            sampler2D _MainTex;
+            sampler2D _Bump;
+            float4 _MainTex_ST;
+            float4 _Bump_ST;
+ 
+            struct a2v
+            {
+                float4 vertex : POSITION;
+                float3 normal : NORMAL;
+                float4 texcoord : TEXCOORD0;
+                float4 tangent : TANGENT; 
+            }; 
+ 
+            struct v2f
+            {
+                float4 pos : POSITION;
+                float2 uv : TEXCOORD0;
+                float2 uv2 : TEXCOORD1;	
+                float3 lightDirection; 
+            };
+ 
+            v2f vert (a2v v)
+            {
+                v2f o;
+                TANGENT_SPACE_ROTATION; 
+ 
+                o.lightDirection = mul(rotation, ObjSpaceLightDir(v.vertex));
+                o.pos = mul( UNITY_MATRIX_MVP, v.vertex); 
+                o.uv = TRANSFORM_TEX (v.texcoord, _MainTex);  
+                o.uv2 = TRANSFORM_TEX (v.texcoord, _Bump);
+                return o;
+            }
+ 
+ 				 // We need to remove the refence to UNITY_AMBIIENT_LIGHT in our second pass copy of the fragment shader, because we've already
+ 				 // handled that in the first pass.
+			float4 frag(v2f i) : COLOR  
+            { 
+                float4 c = tex2D (_MainTex, i.uv);  
+                float3 n =  UnpackNormal(tex2D (_Bump, i.uv2)); 
+                float3 lightColor = float3(0);		// updated line
+                float lengthSq = dot(i.lightDirection, i.lightDirection);
+                float atten = 1.0 / (1.0 + lengthSq);
+                float diff = saturate (dot (n, normalize(i.lightDirection))); 
+                lightColor += _LightColor0.rgb * (diff * atten); 
+                c.rgb = lightColor * c.rgb * 2;
+                return c; 
+ 
+            } 
+ 
+            ENDCG
+        }
     }
     FallBack "Diffuse"
 }

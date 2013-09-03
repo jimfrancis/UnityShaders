@@ -1,9 +1,9 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\5 Diffuse Vertex Lit Fragment\ForwardLitBump_OneLight.shader">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\6 Toon Outline\ToonOutline.shader">
     <Files>
-      <File FileName="Assets\5 Diffuse Vertex Lit Fragment\ForwardLitBump_OneLight.shader" Line="26" Column="32" />
-      <File FileName="Assets\5 Diffuse Vertex Lit Fragment\DiffuseVertexLitFragment.shader" Line="27" Column="76" />
+      <File FileName="Assets\6 Toon Outline\ToonOutline.shader" Line="197" Column="25" />
+      <File FileName="Assets\5 Diffuse Vertex Lit Fragment\ForwardLitBumpFragment_MultipleLights.shader" Line="175" Column="14" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
