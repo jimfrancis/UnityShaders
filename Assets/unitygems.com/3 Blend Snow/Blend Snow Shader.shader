@@ -4,7 +4,7 @@
 // the closer the angle of the pixel is to the snow direction modified by the level of the snow. 
 // In other words, the more snowy it is, the more opaque the snow on a pixel gets before it becomes solid white (or in fact, snow color)
 
-Shader "Custom/Snow Shader" {
+Shader "unitygems.com/Snow Shader" {
 	Properties {
 		_MainTex ("Base (RGB)", 2D) = "white" {}	
 			// new normal map texture - defines a property called _Bump which is a 2D image with a default of "bump" (empty normal map)

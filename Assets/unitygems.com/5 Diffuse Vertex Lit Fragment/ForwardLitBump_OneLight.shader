@@ -1,7 +1,7 @@
 ﻿// http://unitygems.com/noobs-guide-shaders-5-bumped-diffuse-shader/
 
 
-Shader "Custom/ForwardLitBumpFragment_OneLight" {
+Shader "unitygems.com/ForwardLitBumpFragment_OneLight" {
     Properties {
         _MainTex ("Base (RGB)", 2D) = "white" {}
         _Bump ("Bump", 2D) = "bump" {}

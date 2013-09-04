@@ -1,6 +1,6 @@
 ﻿// unitygems.com/noobs-guide-shaders-2/
 
-Shader "Custom/Snow Shader" {
+Shader "unitygems.com/Snow Shader" {
 	Properties {
 		_MainTex ("Base (RGB)", 2D) = "white" {}	
 			// new normal map texture - defines a property called _Bump which is a 2D image with a default of "bump" (empty normal map)

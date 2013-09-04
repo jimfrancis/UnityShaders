@@ -1,6 +1,6 @@
 ﻿// unitygems.com/noobshader1/#prettyPhoto
 
-Shader "Custom/Diffuse Texture" {
+Shader "unitygems.com/Diffuse Texture" {
 	Properties {
 		// Property definitions follow this format:
 		// _Name ("Display Name", type) = default value [{options}]

@@ -13,7 +13,7 @@
 //		- write a pass that draws back faces only
 //		- move all of the vertices so that they are bigger
 
-Shader "Custom/ToonOutline" {
+Shader "unitygems.com/ToonOutline" {
 	Properties {
         _MainTex ("Base (RGB)", 2D) = "white" {}
         _Bump ("Bump", 2D) = "bump" {}

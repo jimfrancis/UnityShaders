@@ -7,7 +7,7 @@
 //	* Draw an outline in black around our model
 
 
-Shader "Custom/Toon" {
+Shader "unitygems.com/Toon" {
 	Properties {
 		_MainTex ("Base (RGB)", 2D) = "white" {}
 			// new normal map texture - defines a property called _Bump which is a 2D image with a default of "bump" (empty normal map)

@@ -1,7 +1,7 @@
 ﻿// http://unitygems.com/noobs-guide-shaders-5-bumped-diffuse-shader/
 
 
-Shader "Custom/DiffuseVertexLitFragment" {
+Shader "unitygems.com/DiffuseVertexLitFragment" {
 	Properties {
 		_MainTex ("Base (RGB)", 2D) = "white" {}
 	}
